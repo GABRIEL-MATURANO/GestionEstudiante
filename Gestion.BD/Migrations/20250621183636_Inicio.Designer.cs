@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion.BD.Migrations
 {
     [DbContext(typeof(MiDbContext))]
-    [Migration("20250621132529_Inicio")]
+    [Migration("20250621183636_Inicio")]
     partial class Inicio
     {
         /// <inheritdoc />
@@ -193,7 +193,7 @@ namespace Gestion.BD.Migrations
                     b.HasIndex(new[] { "NombreUsuario" }, "NombreUsuario_UQ")
                         .IsUnique();
 
-                    b.ToTable("TipoPersonas");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiantes", b =>

@@ -12,7 +12,7 @@ namespace Gestion.BD.Datos
     {
         public DbSet<Personas> Personas { get; set; }
         
-        public DbSet<Usuarios> TipoPersonas { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Rol> rols { get; set; }
         public DbSet<Estudiantes> Estudiantes { get; set; }
         public DbSet<Carreras> Carreras { get; set; }   

@@ -78,7 +78,7 @@ namespace Gestion.BD.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TipoPersonas",
+                name: "Usuarios",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -90,15 +90,15 @@ namespace Gestion.BD.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoPersonas", x => x.Id);
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TipoPersonas_Personas_PersonaId",
+                        name: "FK_Usuarios_Personas_PersonaId",
                         column: x => x.PersonaId,
                         principalTable: "Personas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TipoPersonas_rols_RolId",
+                        name: "FK_Usuarios_rols_RolId",
                         column: x => x.RolId,
                         principalTable: "rols",
                         principalColumn: "Id",
@@ -171,19 +171,19 @@ namespace Gestion.BD.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TipoPersonas_PersonaId",
-                table: "TipoPersonas",
+                name: "IX_Usuarios_PersonaId",
+                table: "Usuarios",
                 column: "PersonaId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TipoPersonas_RolId",
-                table: "TipoPersonas",
+                name: "IX_Usuarios_RolId",
+                table: "Usuarios",
                 column: "RolId");
 
             migrationBuilder.CreateIndex(
                 name: "NombreUsuario_UQ",
-                table: "TipoPersonas",
+                table: "Usuarios",
                 column: "NombreUsuario",
                 unique: true);
         }
@@ -195,7 +195,7 @@ namespace Gestion.BD.Migrations
                 name: "EstudiantesCarreras");
 
             migrationBuilder.DropTable(
-                name: "TipoPersonas");
+                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Carreras");

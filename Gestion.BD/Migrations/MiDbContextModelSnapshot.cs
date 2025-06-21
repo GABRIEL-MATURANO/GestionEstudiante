@@ -190,7 +190,7 @@ namespace Gestion.BD.Migrations
                     b.HasIndex(new[] { "NombreUsuario" }, "NombreUsuario_UQ")
                         .IsUnique();
 
-                    b.ToTable("TipoPersonas");
+                    b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiantes", b =>
