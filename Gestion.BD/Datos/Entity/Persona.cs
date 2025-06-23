@@ -11,14 +11,11 @@ namespace Gestion.BD.Datos.Entity
     [Index(nameof(DNI), Name = "DNI_UQ", IsUnique = true)]
     [Index(nameof(Telefono), Name = "Telefono_UQ", IsUnique = true)]
     [Index(nameof(CorreoElec), Name = "CorreoElectronico_UQ", IsUnique = true)]
-    public class Personas
+    public class Persona
 
     {
         public int Id {  get; set; }
-
-        public Estudiantes? Estudiantes { get; set; }   
-
-       
+ 
 
         [Required(ErrorMessage = "El campo del nombre es obligatorio")]
         [MaxLength(30, ErrorMessage = "El nombre no puede exceder los 30 caracteres")]
@@ -52,8 +49,13 @@ namespace Gestion.BD.Datos.Entity
         [MaxLength(30, ErrorMessage = "El telefono no puede exceder los 30 caracteres")]
         public required string Telefono { get; set; }
 
-        public Usuarios? Usuarios { get; set; }
+        public int UsuarioId { get; set; }
+        public Usuario? Usuarios { get; set; } // Relación con Usuario
 
+        
+
+        public int EstudianteId { get; set; }
+        public Estudiante? Estudiantes { get; set; } // Relación con Estudiante
 
 
     }

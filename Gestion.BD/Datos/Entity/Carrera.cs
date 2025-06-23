@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Gestion.BD.Datos.Entity
 {
     [Index(nameof(NombreC), Name = "NombreCarrera_UQ", IsUnique = true)]
-    public class Carreras
+    public class Carrera
     {
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace Gestion.BD.Datos.Entity
 
 
         //agrego la referencia a la tabla porque es mucho a muchos 
-        public List<EstudiantesCarreras> EstudiantesCarreras { get; set; } = new();
+        public List<EstudianteCarrera> EstudiantesCarreras { get; set; } = new();
     }
 }

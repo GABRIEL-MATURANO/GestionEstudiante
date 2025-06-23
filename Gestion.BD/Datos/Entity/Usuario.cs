@@ -11,7 +11,7 @@ namespace Gestion.BD.Datos.Entity
 {
     [Index(nameof(NombreUsuario), Name = "NombreUsuario_UQ", IsUnique = true)]
     
-    public class Usuarios
+    public class Usuario
     {
         public int Id { get; set; }
 
@@ -26,13 +26,13 @@ namespace Gestion.BD.Datos.Entity
         public required string Contraseña { get; set; }
 
         public int PersonaId  { get; set; }   
-        public Personas? Personas { get; set; }
+        public Persona? Personas { get; set; }
 
         public int RolId { get; set; }
 
-        public Rol? Rol { get; set; }
+        public Rol? Rols { get; set; }
 
-
+        
 
     }
 }

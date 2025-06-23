@@ -36,7 +36,9 @@ namespace Gestion.BD.Migrations
                     FechaNac = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CorreoElec = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Sexo = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
+                    Telefono = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    EstudianteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -106,7 +108,7 @@ namespace Gestion.BD.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EstudiantesCarreras",
+                name: "EstudianteCarrera",
                 columns: table => new
                 {
                     EstudiantesID = table.Column<int>(type: "int", nullable: false),
@@ -114,15 +116,15 @@ namespace Gestion.BD.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EstudiantesCarreras", x => new { x.EstudiantesID, x.CarrerasId });
+                    table.PrimaryKey("PK_EstudianteCarrera", x => new { x.EstudiantesID, x.CarrerasId });
                     table.ForeignKey(
-                        name: "FK_EstudiantesCarreras_Carreras_CarrerasId",
+                        name: "FK_EstudianteCarrera_Carreras_CarrerasId",
                         column: x => x.CarrerasId,
                         principalTable: "Carreras",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EstudiantesCarreras_Estudiantes_EstudiantesID",
+                        name: "FK_EstudianteCarrera_Estudiantes_EstudiantesID",
                         column: x => x.EstudiantesID,
                         principalTable: "Estudiantes",
                         principalColumn: "Id",
@@ -136,6 +138,11 @@ namespace Gestion.BD.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_EstudianteCarrera_CarrerasId",
+                table: "EstudianteCarrera",
+                column: "CarrerasId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Estudiantes_PersonaId",
                 table: "Estudiantes",
                 column: "PersonaId",
@@ -146,11 +153,6 @@ namespace Gestion.BD.Migrations
                 table: "Estudiantes",
                 column: "Legajo",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_EstudiantesCarreras_CarrerasId",
-                table: "EstudiantesCarreras",
-                column: "CarrerasId");
 
             migrationBuilder.CreateIndex(
                 name: "CorreoElectronico_UQ",
@@ -192,7 +194,7 @@ namespace Gestion.BD.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EstudiantesCarreras");
+                name: "EstudianteCarrera");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

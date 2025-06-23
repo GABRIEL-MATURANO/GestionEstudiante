@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion.BD.Migrations
 {
     [DbContext(typeof(MiDbContext))]
-    [Migration("20250621183636_Inicio")]
+    [Migration("20250623074032_Inicio")]
     partial class Inicio
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace Gestion.BD.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Carreras", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Carrera", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -45,7 +45,7 @@ namespace Gestion.BD.Migrations
                     b.ToTable("Carreras");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiantes", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiante", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace Gestion.BD.Migrations
                     b.ToTable("Estudiantes");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.EstudiantesCarreras", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.EstudianteCarrera", b =>
                 {
                     b.Property<int>("EstudiantesID")
                         .HasColumnType("int");
@@ -82,10 +82,10 @@ namespace Gestion.BD.Migrations
 
                     b.HasIndex("CarrerasId");
 
-                    b.ToTable("EstudiantesCarreras");
+                    b.ToTable("EstudianteCarrera");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Personas", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Persona", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,6 +106,9 @@ namespace Gestion.BD.Migrations
                     b.Property<int>("DNI")
                         .HasColumnType("int");
 
+                    b.Property<int>("EstudianteId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaNac")
                         .HasColumnType("datetime2");
 
@@ -123,6 +126,9 @@ namespace Gestion.BD.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -159,7 +165,7 @@ namespace Gestion.BD.Migrations
                     b.ToTable("rols");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Usuarios", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -196,26 +202,26 @@ namespace Gestion.BD.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiantes", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiante", b =>
                 {
-                    b.HasOne("Gestion.BD.Datos.Entity.Personas", "Personas")
+                    b.HasOne("Gestion.BD.Datos.Entity.Persona", "Personas")
                         .WithOne("Estudiantes")
-                        .HasForeignKey("Gestion.BD.Datos.Entity.Estudiantes", "PersonaId")
+                        .HasForeignKey("Gestion.BD.Datos.Entity.Estudiante", "PersonaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Personas");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.EstudiantesCarreras", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.EstudianteCarrera", b =>
                 {
-                    b.HasOne("Gestion.BD.Datos.Entity.Carreras", "Carreras")
+                    b.HasOne("Gestion.BD.Datos.Entity.Carrera", "Carreras")
                         .WithMany("EstudiantesCarreras")
                         .HasForeignKey("CarrerasId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gestion.BD.Datos.Entity.Estudiantes", "Estudiantes")
+                    b.HasOne("Gestion.BD.Datos.Entity.Estudiante", "Estudiantes")
                         .WithMany("EstudiantesCarreras")
                         .HasForeignKey("EstudiantesID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -226,15 +232,15 @@ namespace Gestion.BD.Migrations
                     b.Navigation("Estudiantes");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Usuarios", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Usuario", b =>
                 {
-                    b.HasOne("Gestion.BD.Datos.Entity.Personas", "Personas")
+                    b.HasOne("Gestion.BD.Datos.Entity.Persona", "Personas")
                         .WithOne("Usuarios")
-                        .HasForeignKey("Gestion.BD.Datos.Entity.Usuarios", "PersonaId")
+                        .HasForeignKey("Gestion.BD.Datos.Entity.Usuario", "PersonaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gestion.BD.Datos.Entity.Rol", "Rol")
+                    b.HasOne("Gestion.BD.Datos.Entity.Rol", "Rols")
                         .WithMany("Usuarios")
                         .HasForeignKey("RolId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -242,20 +248,20 @@ namespace Gestion.BD.Migrations
 
                     b.Navigation("Personas");
 
-                    b.Navigation("Rol");
+                    b.Navigation("Rols");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Carreras", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Carrera", b =>
                 {
                     b.Navigation("EstudiantesCarreras");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiantes", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Estudiante", b =>
                 {
                     b.Navigation("EstudiantesCarreras");
                 });
 
-            modelBuilder.Entity("Gestion.BD.Datos.Entity.Personas", b =>
+            modelBuilder.Entity("Gestion.BD.Datos.Entity.Persona", b =>
                 {
                     b.Navigation("Estudiantes");
 

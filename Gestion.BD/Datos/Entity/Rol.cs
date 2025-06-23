@@ -18,7 +18,7 @@ namespace Gestion.BD.Datos.Entity
         [Required(ErrorMessage = "El campo del nombre de rol es obligatorio")]
         public required string NombreRol {  get; set; }
 
-        public List<Usuarios> Usuarios { get; set; } = new List<Usuarios>();    
+        public List<Usuario> Usuarios { get; set; } = new List<Usuario>();    
 
     }
 }

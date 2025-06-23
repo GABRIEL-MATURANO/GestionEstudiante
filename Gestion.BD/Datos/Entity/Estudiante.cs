@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace Gestion.BD.Datos.Entity
 {
     [Index(nameof(Legajo), Name = "Legajo_UQ", IsUnique = true)]
-    public class Estudiantes
+    public class Estudiante
     {
         public int Id { get; set; }
 
         public int PersonaId { get; set; }
-        public Personas? Personas { get; set; } 
+        public Persona? Personas { get; set; } 
 
 
         [Required(ErrorMessage = "El campo del legajo es obligatorio")]
@@ -22,6 +22,6 @@ namespace Gestion.BD.Datos.Entity
 
 
         //agrego la referencia a la tabla porque es mucho a muchos 
-        public List<EstudiantesCarreras> EstudiantesCarreras { get; set; } = new();
+        public List<EstudianteCarrera> EstudiantesCarreras { get; set; } = new();
     }
 }

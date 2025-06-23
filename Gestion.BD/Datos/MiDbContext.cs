@@ -10,12 +10,12 @@ namespace Gestion.BD.Datos
 {
     public class MiDbContext : DbContext
     {
-        public DbSet<Personas> Personas { get; set; }
+        public DbSet<Persona> Personas { get; set; }
         
-        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Rol> rols { get; set; }
-        public DbSet<Estudiantes> Estudiantes { get; set; }
-        public DbSet<Carreras> Carreras { get; set; }   
+        public DbSet<Estudiante> Estudiantes { get; set; }
+        public DbSet<Carrera> Carreras { get; set; }   
 
         
         public MiDbContext(DbContextOptions<MiDbContext> options) : base(options)
@@ -24,33 +24,35 @@ namespace Gestion.BD.Datos
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Relación 1:1 entre Usuario y Persona
-            modelBuilder.Entity<Usuarios>()
+            modelBuilder.Entity<Usuario>()
                 .HasOne(u => u.Personas)
                 .WithOne(p => p.Usuarios)
-                .HasForeignKey<Usuarios>(u => u.PersonaId);
+                .HasForeignKey<Usuario>(u => u.PersonaId);
+
+           
 
             // Relación N:1 entre Usuario y Rol
-            modelBuilder.Entity<Usuarios>()
-                .HasOne(u => u.Rol)
+            modelBuilder.Entity<Usuario>()
+                .HasOne(u => u.Rols)
                 .WithMany(r => r.Usuarios)
                 .HasForeignKey(u => u.RolId);
 
             // Relación 1:1 entre Estudiante y Persona
-            modelBuilder.Entity<Estudiantes>()
+            modelBuilder.Entity<Estudiante>()
                 .HasOne(e => e.Personas)
                 .WithOne(p => p.Estudiantes)
-                .HasForeignKey<Estudiantes>(e => e.PersonaId); 
+                .HasForeignKey<Estudiante>(e => e.PersonaId); 
 
             // Relación muchos a muchos entre Estudiantes y Carreras
-            modelBuilder.Entity<EstudiantesCarreras>()
+            modelBuilder.Entity<EstudianteCarrera>()
                 .HasKey(ec => new { ec.EstudiantesID, ec.CarrerasId});
 
-            modelBuilder.Entity<EstudiantesCarreras>()
+            modelBuilder.Entity<EstudianteCarrera>()
                 .HasOne(ec => ec.Estudiantes)
                 .WithMany(e => e.EstudiantesCarreras)
                 .HasForeignKey(ec => ec.EstudiantesID);
 
-            modelBuilder.Entity<EstudiantesCarreras>()
+            modelBuilder.Entity<EstudianteCarrera>()
                 .HasOne(ec => ec.Carreras)
                 .WithMany(c => c.EstudiantesCarreras)
                 .HasForeignKey(ec => ec.CarrerasId);
